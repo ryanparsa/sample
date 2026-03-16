@@ -17,10 +17,13 @@ RUN CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH go build -o main ./cmd/main.
 # Run stage
 FROM alpine:latest
 
-WORKDIR /root/
+WORKDIR /app
 
 # Copy binary from builder
 COPY --from=builder /app/main .
+
+
+RUN chmod +x /app/main
 
 EXPOSE 8080
 
