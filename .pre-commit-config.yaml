@@ -1,0 +1,26 @@
+repos:
+  - repo: https://github.com/golangci/golangci-lint
+    rev: v2.1.2
+    hooks:
+      - id: golangci-lint
+
+  - repo: https://github.com/securego/gosec
+    rev: v2.22.4
+    hooks:
+      - id: gosec
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-merge-conflict
+      - id: detect-private-key
+      - id: check-added-large-files
+
+  - repo: local
+    hooks:
+      - id: opa-policy-test
+        name: OPA Policy Tests
+        entry: opa test policies/ -v
+        language: system
+        pass_filenames: false
+        files: \.rego$
